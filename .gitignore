@@ -1,0 +1,6 @@
+# Files to ignore
+node_modules
+build
+tests
+demos
+CHANGELOG.md
