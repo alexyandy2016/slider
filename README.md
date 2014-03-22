@@ -84,6 +84,8 @@ A disable state class for prev and next button.
 * type: number
 * default: 5000
 
+The duration milliseconds of each slide item.
+
 
 #### effect
 

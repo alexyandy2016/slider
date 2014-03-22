@@ -1,5 +1,5 @@
 /*!
- * Slider v0.0.1
+ * Slider v0.0.2
  * https://github.com/fengyuanchen/slider
  *
  * Copyright 2014 Fengyuan Chen
@@ -210,6 +210,7 @@
             if (height !== this.height || width !== this.width) {
                 this.height = height;
                 this.width = width;
+                this.stop();
                 this.render();
             }
         },

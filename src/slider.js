@@ -202,6 +202,7 @@
             if (height !== this.height || width !== this.width) {
                 this.height = height;
                 this.width = width;
+                this.stop();
                 this.render();
             }
         },

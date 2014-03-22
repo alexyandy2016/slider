@@ -2,7 +2,7 @@
     "name": "slider",
     "title": "Slider",
     "description": "A jQuery slide plugin.",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "author": "Fengyuan Chen",
     "homepage": "https://github.com/fengyuanchen/slider",
     "license": "MIT",
