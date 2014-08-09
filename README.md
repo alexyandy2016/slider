@@ -2,6 +2,8 @@
 
 A jQuery slide plugin.
 
+- [Documentation](http://fengyuanchen.github.io/slider)
+
 
 # Getting started
 
@@ -38,14 +40,9 @@ $("#target").slider({
 ```
 
 
-## Configure
-
-### Setup
+## Options
 
 Setup with `$("#target").slider(options)`, or global setup with `$.fn.slider.setDefaults(options)`.
-
-
-### Options
 
 #### activeClass
 
@@ -158,3 +155,19 @@ $("#target").slider({
     autoplay: false
 }).slider("start");
 ```
+
+
+## Browser Support
+
+- IE 6+
+- Chrome 33+
+- Firefox 27+
+- Safari 5.1+
+- Opera 19+
+
+As a jQuery plugin, you can reference to the [jQuery Browser Support](http://jquery.com/browser-support/).
+
+
+## [License](https://github.com/fengyuanchen/slider/blob/master/LICENSE.md)
+
+Released under the [MIT](http://opensource.org/licenses/mit-license.html) license.
