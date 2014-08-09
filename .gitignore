@@ -1,6 +1,7 @@
 # Files to ignore
 node_modules
+release
 build
-tests
+docs
 demos
 CHANGELOG.md

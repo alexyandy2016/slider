@@ -2,26 +2,26 @@ module.exports = function(grunt) {
 
     "use strict";
 
-    var pkg = grunt.file.readJSON("package.json"),
-        key;
-
     grunt.initConfig({
-        pkg: pkg,
+        pkg: grunt.file.readJSON("package.json"),
         banner: "/*!\n" +
-                " * <%= pkg.title %> v<%= pkg.version %>\n" +
+                " * Slider v<%= pkg.version %>\n" +
                 " * <%= pkg.homepage %>\n" +
                 " *\n" +
-                " * Copyright <%= grunt.template.today('yyyy') %> <%= pkg.author %>\n" +
-                " * Released under the <%= pkg.license %> license\n" +
+                " * Copyright <%= grunt.template.today('yyyy') %> <%= pkg.author.name %>\n" +
+                " * Released under the <%= pkg.license.type %> license\n" +
                 " */\n",
         clean: {
-            files: ["build/<%= pkg.version %>", "dist/"]
+            dist: ["dist/"],
+            build: ["build/<%= pkg.version %>.<%= grunt.template.today('yyyymmdd') %>"],
+            release: ["release/<%= pkg.version %>"],
+            docs: ["../fengyuanchen.github.io/<%= pkg.name %>/"]
         },
         jshint: {
             options: {
                 jshintrc: ".jshintrc"
             },
-            files: ["*.js", "src/<%= pkg.name %>.js"]
+            files: ["Gruntfile.js", "src/<%= pkg.name %>.js"]
         },
         uglify: {
             dist: {
@@ -48,7 +48,35 @@ module.exports = function(grunt) {
                 expand: true,
                 cwd: "dist/",
                 src: "*.js",
-                dest: "build/<%= pkg.version %>/",
+                dest: "build/<%= pkg.version %>.<%= grunt.template.today('yyyymmdd') %>/",
+                filter: "isFile"
+            },
+            release: {
+                expand: true,
+                cwd: "dist/",
+                src: "*.js",
+                dest: "release/<%= pkg.version %>/",
+                filter: "isFile"
+            },
+            sync: {
+                expand: true,
+                cwd: "dist/",
+                src: "**",
+                dest: "../fengyuanchen.github.io/dist/",
+                filter: "isFile"
+            },
+            i18n: {
+                expand: true,
+                cwd: "i18n/",
+                src: "**",
+                dest: "../fengyuanchen.github.io/i18n/",
+                filter: "isFile"
+            },
+            docs: {
+                expand: true,
+                cwd: "docs/",
+                src: "**",
+                dest: "../fengyuanchen.github.io/<%= pkg.name %>/",
                 filter: "isFile"
             }
         },
@@ -59,11 +87,9 @@ module.exports = function(grunt) {
     });
 
     // Loading dependencies
-    for (key in pkg.devDependencies) {
-        if (key !== "grunt" && key.indexOf("grunt") === 0) {
-            grunt.loadNpmTasks(key);
-        }
-    }
+    require("load-grunt-tasks")(grunt);
 
-    grunt.registerTask("default", ["clean", "jshint", "uglify", "copy:dist", "usebanner", "copy:build"]);
+    grunt.registerTask("release", ["clean:release", "copy:release"]);
+    grunt.registerTask("docs", ["clean:docs", "copy:sync", "copy:i18n", "copy:docs"]);
+    grunt.registerTask("default", ["clean:dist", "clean:build", "jshint", "uglify", "copy:dist", "usebanner", "copy:build"]);
 };
