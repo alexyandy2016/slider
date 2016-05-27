@@ -1,41 +1,39 @@
 {
-    "name": "slider",
-    "description": "A jQuery slide plugin.",
-    "version": "0.0.2",
-    "keywords": [
-        "slide",
-        "jquery",
-        "plugin",
-        "javascript",
-        "front-end",
-        "web",
-        "development"
-    ],
-    "author": {
-        "name": "Fengyuan Chen",
-        "url": "https://github.com/fengyuanchen"
-    },
-    "homepage": "https://github.com/fengyuanchen/slider",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/fengyuanchen/slider.git"
-    },
-    "bugs": {
-        "url": "https://github.com/fengyuanchen/slider/issues"
-    },
-    "license": {
-        "type": "MIT",
-        "url": "https://github.com/fengyuanchen/slider/blob/master/LICENSE.md"
-    },
-
-    "devDependencies": {
-        "grunt": "~0.4.5",
-        "grunt-banner": "~0.2.3",
-        "grunt-contrib-clean": "~0.6.0",
-        "grunt-contrib-jshint": "~0.10.0",
-        "grunt-contrib-uglify": "~0.5.1",
-        "grunt-contrib-copy": "~0.5.0",
-        "grunt-contrib-watch": "~0.6.1",
-        "load-grunt-tasks": "~0.6.0"
-    }
+  "name": "@fengyuanchen/slider",
+  "description": "A simple jQuery slide plugin.",
+  "version": "0.1.0",
+  "main": "dist/slider.js",
+  "license": "MIT",
+  "repository": "fengyuanchen/slider",
+  "homepage": "https://fengyuanchen.github.io/slider",
+  "author": {
+    "name": "Fengyuan Chen",
+    "url": "http://chenfengyuan.com"
+  },
+  "keywords": [
+    "slide",
+    "carousel",
+    "jquery",
+    "plugin",
+    "html",
+    "css",
+    "javascript",
+    "front-end",
+    "web",
+    "development"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.9.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-htmlcomb": "0.1.0",
+    "gulp-jscs": "^3.0.2",
+    "gulp-jshint": "^1.12.0",
+    "gulp-load-plugins": "^1.2.0",
+    "gulp-minify-css": "^1.2.3",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-uglify": "^1.5.1"
+  }
 }

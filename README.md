@@ -1,14 +1,46 @@
-# [Slider](http://fengyuanchen.github.io/slider)
+# [Slider](https://github.com/fengyuanchen/slider)
 
-A jQuery slide plugin.
+A simple jQuery slide plugin.
 
-- [Documentation](http://fengyuanchen.github.io/slider)
-
-
-# Getting started
+- [Demo](https://fengyuanchen.github.io/slider)
 
 
-## Installation
+
+## Table of contents
+
+- [Main](#main)
+- [Getting started](#getting-started)
+- [Options](#options)
+- [Methods](#methods)
+- [No conflict](#no-conflict)
+- [Browser support](#browser-support)
+- [Versioning](#versioning)
+- [License](#license)
+
+
+
+## Main
+
+```
+dist/
+├── slider.js     (9 KB)
+└── slider.min.js (5 KB)
+```
+
+
+
+## Getting started
+
+### Quick start
+
+Three quick start options are available:
+
+- [Download the latest release](https://github.com/fengyuanchen/slider/archive/master.zip).
+- Clone the repository: `git clone https://github.com/fengyuanchen/slider.git`.
+- Install with [NPM](http://npmjs.org): `npm install @fengyuanchen/slider`.
+
+
+### Installation
 
 Include files:
 
@@ -18,156 +50,220 @@ Include files:
 ```
 
 
-## Usage
+### Usage
 
-Initialize with `$.fn.slider` method
+Initialize with `$.fn.slider` method.
 
-```javascript
-$("#target").slider({
-    activeClass: "slider-active", // for slide nav
-    autoplay: true,
-    contentClass: "slider-content",
-    disableClass: "slider-disabled", // for slide "prev" and "next" button
-    duration: 5000,
-    effect: "fade",
-    easing: "swing", // support "swing" and "linear", powered by jquery
-    navClass: "slider-nav",
-    nextClass: "slider-next",
-    prevClass: "slider-prev",
-    speed: 1000,
-    trigger: "click" // for slide nav
+```js
+$('#slider').slider({
+  activeClass: 'slider-active', // for slide nav
+  autoPlay: true,
+  contentClass: 'slider-content',
+  disableClass: 'slider-disabled', // for slide "prev" and "next" button
+  duration: 5000,
+  effect: 'fade',
+  easing: 'swing', // support "swing" and "linear", powered by jQuery
+  navClass: 'slider-nav',
+  nextClass: 'slider-next',
+  prevClass: 'slider-prev',
+  speed: 1000,
+  trigger: 'click' // for slide nav
 });
 ```
+
+[⬆ back to top](#table-of-contents)
+
 
 
 ## Options
 
-Setup with `$("#target").slider(options)`, or global setup with `$.fn.slider.setDefaults(options)`.
+```js
+// Set slider options
+$().slider(options);
 
-#### activeClass
+// Set the global default options
+$.fn.slider.setDefaults(options);
+```
 
-* type: string
-* default: "slider-active"
+### activeClass
 
-A active state class for nav items.
+- Type: `String`
+- Default: `'slider-active'`
+
+An active state class for nav items.
 
 
-#### autoplay
+### autoPlay
 
-* type: boolean
-* default: true
+- Type: `Boolean`
+- Default: `true`
 
 Auto play the slide after initialized.
 
 
-#### contentClass
+### contentClass
 
-* type: string
-* default: "slider-content"
+- Type: `String`
+- Default: `'slider-content'`
 
 The content container.
 
 
-#### disableClass
+### disableClass
 
-* type: string
-* default: "slider-disabled"
+- Type: `String`
+- Default: `'slider-disabled'`
 
-A disable state class for prev and next button.
+A disable state class for previous and next button.
 
 
-#### duration
+### duration
 
-* type: number
-* default: 5000
+- Type: `Number`
+- Default: `5000`
 
 The duration milliseconds of each slide item.
 
 
-#### effect
+### effect
 
-* type: string
-* options: "fade", "scrollx", "scrolly"
-* default: "fade"
-
-
-#### easing
-
-* type: string
-* options: "swing", "linear"
-* default: "swing"
-
-Powered by jquery.
+- Type: `String`
+- Options: `'fade'`, `'scrollX'`, `'scrollY'`
+- Default: `'fade'`
 
 
-#### navClass
+### easing
 
-* type: string
-* default: "slider-nav"
+- Type: `String`
+- Options: `'swing'`, `'linear'`
+- Default: `'swing'`
+
+Powered by jQuery.
+
+
+### navClass
+
+- Type: `String`
+- Default: `'slider-nav'`
 
 The navigation container.
 
 
-#### prevClass
+### prevClass
 
-* type: string
-* default: "slider-prev"
+- Type: `String`
+- Default: `'slider-prev'`
 
-The prev button.
+The previous button.
 
 
-#### nextClass
+### nextClass
 
-* type: string
-* default: "slider-next"
+- Type: `String`
+- Default: `'slider-next'`
 
 The next button.
 
 
-#### speed
+### speed
 
-* type: number
-* default: 1000
+- Type: `Number`
+- Default: `1000`
 
 The speed of the animation.
 
 
-#### trigger
+### trigger
 
-* type: string
-* default: "click"
+- Type: `String`
+- Default: `'click'`
 
-The event of trigger sliding.
+The event for triggering slide.
+
+
+[⬆ back to top](#table-of-contents)
+
 
 
 ## Methods
 
-* render - Render the slider
-* start - Start the slider
-* stop - Stop the slider
-* enable - Enable the slider
-* disable - Disable the slider
+### render()
 
-Usage example:
+Render the slider.
 
-```javascript
-$("#target").slider({
-    autoplay: false
-}).slider("start");
+
+### start()
+
+Start the slider.
+
+```js
+$().slider({
+  autoPlay: false
+}).slider('start');
 ```
+
+
+### stop()
+
+stop the slider.
+
+
+### enable()
+
+Enable the slider.
+
+
+### disable()
+
+Disable the slider.
+
+
+### destroy()
+
+Destroy the slider.
+
+
+[⬆ back to top](#table-of-contents)
+
+
+
+## No conflict
+
+If you have to use other plugin with the same namespace, just call the `$.fn.slider.noConflict` method to revert to it.
+
+```html
+<script src="other-plugin.js"></script>
+<script src="slider.js"></script>
+<script>
+  $.fn.slider.noConflict();
+  // Code that uses other plugin's "$().slider" can follow here.
+</script>
+```
+
 
 
 ## Browser Support
 
-- IE 6+
-- Chrome 33+
-- Firefox 27+
-- Safari 5.1+
-- Opera 19+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Opera (latest)
+- Edge (latest)
+- Internet Explorer 8+
 
-As a jQuery plugin, you can reference to the [jQuery Browser Support](http://jquery.com/browser-support/).
+As a jQuery plugin, you also need to see the [jQuery Browser Support](http://jquery.com/browser-support/).
 
 
-## [License](https://github.com/fengyuanchen/slider/blob/master/LICENSE.md)
 
-Released under the [MIT](http://opensource.org/licenses/mit-license.html) license.
+## Versioning
+
+Maintained under the [Semantic Versioning guidelines](http://semver.org/).
+
+
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT) © [Fengyuan Chen](http://chenfengyuan.com)
+
+
+[⬆ back to top](#table-of-contents)
