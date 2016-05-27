@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="ie=edge" http-equiv="x-ua-compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A simple jQuery slide plugin.">
+  <meta name="keywords" content="HTML, CSS, JS, JavaScript, jQuery plugin, slide, front-end, frontend, web development">
+  <meta name="author" content="Fengyuan Chen">
+  <title>Slider</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/slider.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <!-- Header -->
+  <header class="navbar navbar-static-top docs-header" id="top">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" data-target="#navbar-collapse-1" data-toggle="collapse" type="button">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="./">Slider</a>
+      </div>
+      <nav class="collapse navbar-collapse" id="navbar-collapse-1" role="navigation">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="https://github.com/fengyuanchen/slider/tree/v0.1.0/README.md">Docs</a></li>
+          <li><a href="https://github.com/fengyuanchen/slider">GitHub</a></li>
+          <li><a href="https://fengyuanchen.github.io">More</a></li>
+          <li><a href="http://chenfengyuan.com">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Jumbotron -->
+  <div class="jumbotron docs-jumbotron">
+    <div class="container">
+      <h1>Slider <small class="version">v0.1.0</small></h1>
+      <p class="lead">A simple jQuery slide plugin.</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="container">
+    <h1 class="page-header">Demo</h1>
+    <div class="slider" data-toggle="slider">
+      <div class="slider-content">
+        <div><img src="img/picture-1.jpg" alt="Picture 1"></div>
+        <div><img src="img/picture-2.jpg" alt="Picture 2"></div>
+        <div><img src="img/picture-3.jpg" alt="Picture 3"></div>
+      </div>
+      <div class="slider-nav">
+        <div class="slider-active"></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="slider-prev slider-disabled">&lsaquo;</div>
+      <div class="slider-next">&rsaquo;</div>
+    </div>
+    <p><a class="btn btn-primary" href="fullscreen.html">Fullscreen</a></p>
+  </div>
+
+  <!-- Footer -->
+  <footer class="docs-footer">
+    <div class="container">
+      <p class="heart"></p>
+      <ul class="list-inline links">
+        <li><a href="https://github.com/fengyuanchen/slider">GitHub</a></li>
+        <li><a href="https://github.com/fengyuanchen/slider/releases">Releases</a></li>
+        <li><a href="https://github.com/fengyuanchen/slider/blob/master/LICENSE">License</a></li>
+        <li><a href="http://chenfengyuan.com">About</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  <script src="https://fengyuanchen.github.io/js/common.js"></script>
+  <script src="js/slider.js"></script>
+</body>
+</html>
