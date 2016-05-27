@@ -23,8 +23,8 @@ A simple jQuery slide plugin.
 
 ```
 dist/
-├── slider.js     (9 KB)
-└── slider.min.js (6 KB)
+├── slider.js     (10 KB)
+└── slider.min.js ( 5 KB)
 ```
 
 
@@ -71,7 +71,7 @@ $('#slider').slider({
 });
 ```
 
-[⬆ back to top](#table-of-contents)
+[⬆ Back to top](#table-of-contents)
 
 
 
@@ -181,7 +181,7 @@ The speed of the animation.
 The event for triggering slide.
 
 
-[⬆ back to top](#table-of-contents)
+[⬆ Back to top](#table-of-contents)
 
 
 
@@ -223,7 +223,7 @@ Disable the slider.
 Destroy the slider.
 
 
-[⬆ back to top](#table-of-contents)
+[⬆ Back to top](#table-of-contents)
 
 
 
@@ -266,4 +266,4 @@ Maintained under the [Semantic Versioning guidelines](http://semver.org/).
 [MIT](http://opensource.org/licenses/MIT) © [Fengyuan Chen](http://chenfengyuan.com)
 
 
-[⬆ back to top](#table-of-contents)
+[⬆ Back to top](#table-of-contents)

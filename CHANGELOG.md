@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.1.1 (May 27, 2016)
+
+- Simplify code.
+
 
 ### 0.1.0 (May 27, 2016)
 
