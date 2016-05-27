@@ -10,9 +10,7 @@ var scripts = {
     'src/slider.js',
     'docs/js/main.js'
   ],
-  main: 'dist/slider.js',
   docs: 'docs/js',
-  site: '_gh_pages/js',
   src: 'src/slider.js',
   dest: 'dist'
 };
@@ -56,7 +54,7 @@ gulp.task('jscs', function () {
 });
 
 gulp.task('js', ['jshint', 'jscs'], function () {
-  return gulp.src(scripts.main)
+  return gulp.src(scripts.src)
     .pipe(plugins.replace(replacement.regexp, replacement.filter))
     .pipe(gulp.dest(scripts.dest))
     .pipe(gulp.dest(scripts.docs))
