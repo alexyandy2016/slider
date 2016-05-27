@@ -59,15 +59,14 @@ gulp.task('js', ['jshint', 'jscs'], function () {
   return gulp.src(scripts.main)
     .pipe(plugins.replace(replacement.regexp, replacement.filter))
     .pipe(gulp.dest(scripts.dest))
-    .pipe(gulp.dest(scripts.site))
+    .pipe(gulp.dest(scripts.docs))
     .pipe(plugins.rename({
       suffix: '.min'
     }))
     .pipe(plugins.uglify({
       preserveComments: 'license'
     }))
-    .pipe(gulp.dest(scripts.dest))
-    .pipe(gulp.dest(scripts.site));
+    .pipe(gulp.dest(scripts.dest));
 });
 
 gulp.task('htmlcomb', function () {
@@ -76,7 +75,7 @@ gulp.task('htmlcomb', function () {
     .pipe(gulp.dest('docs'));
 });
 
-gulp.task('docs', function () {
+gulp.task('docs', ['js'], function () {
   return gulp.src('docs/**')
     .pipe(gulp.dest('_gh_pages'));
 });

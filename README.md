@@ -24,7 +24,7 @@ A simple jQuery slide plugin.
 ```
 dist/
 ├── slider.js     (9 KB)
-└── slider.min.js (5 KB)
+└── slider.min.js (6 KB)
 ```
 
 
