@@ -1,11 +1,11 @@
 /*!
- * Slider v@VERSION
+ * Slider v0.1.0
  * https://github.com/fengyuanchen/slider
  *
- * Copyright (c) 2014-@YEAR Fengyuan Chen
+ * Copyright (c) 2014-2016 Fengyuan Chen
  * Released under the MIT license
  *
- * Date: @DATE
+ * Date: 2016-05-27T07:05:17.286Z
  */
 
 (function (factory) {
