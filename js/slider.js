@@ -1,11 +1,11 @@
 /*!
- * Slider v0.1.0
+ * Slider v0.1.1
  * https://github.com/fengyuanchen/slider
  *
  * Copyright (c) 2014-2016 Fengyuan Chen
  * Released under the MIT license
  *
- * Date: 2016-05-27T07:05:17.286Z
+ * Date: 2016-05-27T09:58:41.538Z
  */
 
 (function (factory) {
@@ -49,29 +49,32 @@
   }
 
   function Slider(element, options) {
-    this.$element = $(element);
-    this.options = $.extend({}, Slider.DEFAULTS, $.isPlainObject(options) ? options : {});
-    this.init();
+    var self = this;
+
+    self.$element = $(element);
+    self.options = $.extend({}, Slider.DEFAULTS, $.isPlainObject(options) ? options : {});
+    self.init();
   }
 
   Slider.prototype = {
     constructor: Slider,
 
     init: function () {
-      var $this = this.$element;
-      var options = this.options;
+      var self = this;
+      var $this = self.$element;
+      var options = self.options;
       var styles = {
             overflow: 'hidden'
           };
 
-      this.$content = $this.find('.' + options.contentClass);
-      this.$items = this.$content.children();
+      self.$content = $this.find('.' + options.contentClass);
+      self.$items = self.$content.children();
 
-      this.$nav = $this.find('.' + options.navClass);
-      this.$btns = this.$nav.children();
+      self.$nav = $this.find('.' + options.navClass);
+      self.$btns = self.$nav.children();
 
-      this.$prev = $this.find('.' + options.prevClass);
-      this.$next = $this.find('.' + options.nextClass);
+      self.$prev = $this.find('.' + options.prevClass);
+      self.$next = $this.find('.' + options.nextClass);
 
       if ($this.css('position') === 'static') {
         styles.position = 'relative';
@@ -79,197 +82,213 @@
 
       $this.css(styles);
 
-      this.index = 0;
-      this.length = 1;
+      self.index = 0;
+      self.length = 1;
 
-      if (this.$items.length > 1) {
-        this.render();
+      if (self.$items.length > 1) {
+        self.render();
       }
     },
 
     render: function () {
-      var $this = this.$element;
-      var options = this.options;
-      var firstItem = this.$items.first();
+      var self = this;
+      var $this = self.$element;
+      var options = self.options;
+      var firstItem = self.$items.first();
 
       firstItem.removeAttr('style');
-      this.itemHeight = firstItem.height();
-      this.itemWidth = firstItem.width();
-      this.itemLength = this.$items.length;
+      self.itemHeight = firstItem.height();
+      self.itemWidth = firstItem.width();
+      self.itemLength = self.$items.length;
 
-      this.width = $this.width();
-      this.height = $this.height();
+      self.width = $this.width();
+      self.height = $this.height();
 
       if (options.effect.toLowerCase() === 'scrollx') {
-        this.scrollX();
+        self.scrollX();
       } else if (options.effect.toLowerCase() === 'scrolly') {
-        this.scrollY();
+        self.scrollY();
       } else {
-        this.fade();
+        self.fade();
       }
 
-      this.firstIndexOflastView = this.itemLength - (this.itemLength % this.length || this.length);
-      this.enable();
+      self.firstIndexOflastView = self.itemLength - (self.itemLength % self.length || self.length);
+      self.enable();
 
       if (options.autoPlay || options.autoplay) {
-        this.start();
+        self.start();
       }
     },
 
     rerender: function () {
-      var $this = this.$element;
+      var self = this;
+      var $this = self.$element;
 
-      if ($this.width() !== this.width || $this.height() !== this.height) {
-        this.stop();
-        this.render();
+      if ($this.width() !== self.width || $this.height() !== self.height) {
+        self.stop();
+        self.render();
       }
     },
 
     fade: function () {
+      var self = this;
 
-      if (this.$content.css('position') === 'static') {
-        this.$content.css('position', 'relative');
+      if (self.$content.css('position') === 'static') {
+        self.$content.css('position', 'relative');
       }
 
-      this.$items.css({
-        display: 'none',
-        height: this.itemHeight,
-        left: 0,
+      self.$items.css({
         position: 'absolute',
         top: 0,
-        width: this.itemWidth
+        left: 0,
+        display: 'none',
+        width: self.itemWidth,
+        height: self.itemHeight
       }).first().show();
 
-      this.sliding = function () {
-        var speed = this.options.speed;
-        var easing = this.options.easing;
+      self.sliding = function () {
+        var speed = self.options.speed;
+        var easing = self.options.easing;
 
-        this.$items.stop(true).fadeOut(speed, easing).eq(this.index).fadeIn(speed, easing);
+        self.$items.stop(true).fadeOut(speed, easing).eq(self.index).fadeIn(speed, easing);
       };
     },
 
     scrollX: function () {
-      this.length = Math.floor(this.width / this.itemWidth);
+      var self = this;
 
-      this.$items.css({
-        height: this.itemHeight,
+      self.length = Math.floor(self.width / self.itemWidth);
+
+      self.$items.css({
         float: 'left',
-        width: this.itemWidth
+        width: self.itemWidth,
+        height: self.itemHeight
       });
 
-      this.$content.css({
-        height: this.itemHeight,
-        left: 0,
+      self.$content.css({
         position: 'absolute',
+        left: 0,
         top: 0,
-        width: this.itemWidth * (this.itemLength + 1)
+        width: self.itemWidth * (self.itemLength + 1),
+        height: self.itemHeight
       });
 
-      this.sliding = function () {
-        this.$content.stop(true).animate({
-          left: -this.itemWidth * this.index
-        }, this.options.speed, this.options.easing);
+      self.sliding = function () {
+        self.$content.stop(true).animate({
+          left: -self.itemWidth * self.index
+        }, self.options.speed, self.options.easing);
       };
     },
 
     scrollY: function () {
-      this.length = Math.floor(this.height / this.itemHeight);
+      var self = this;
 
-      this.$items.css({
-        height: this.itemHeight,
-        width: this.itemWidth
+      self.length = Math.floor(self.height / self.itemHeight);
+
+      self.$items.css({
+        width: self.itemWidth,
+        height: self.itemHeight
       });
 
-      this.$content.css({
-        height: this.itemHeight * (this.itemLength + 1),
-        left: 0,
+      self.$content.css({
+        height: self.itemHeight * (self.itemLength + 1),
         position: 'absolute',
-        top: 0
+        top: 0,
+        left: 0
       });
 
-      this.sliding = function () {
-        this.$content.stop(true).animate({
-          top: -this.itemHeight * this.index
-        }, this.options.speed, this.options.easing);
+      self.sliding = function () {
+        self.$content.stop(true).animate({
+          top: -self.itemHeight * self.index
+        }, self.options.speed, self.options.easing);
       };
     },
 
     enable: function () {
-      var that = this;
+      var self = this;
 
-      if (this.active) {
+      if (self.active) {
         return;
       }
 
-      this.active = true;
+      self.active = true;
 
-      this.$element.on({
-        mouseover: $.proxy(this.stop, this),
-        mouseout: $.proxy(this.start, this)
+      self.$element.on({
+        mouseover: $.proxy(self.stop, self),
+        mouseout: $.proxy(self.start, self)
       });
 
-      this.$btns.on(this.options.trigger, function () {
-        that.index = $(this).index();
-        that.slide();
+      self.$btns.on(self.options.trigger, function () {
+        self.index = $(self).index();
+        self.slide();
       });
 
-      this.$prev.on('click', $.proxy(this.prev, this));
-      this.$next.on('click', $.proxy(this.next, this));
+      self.$prev.on('click', $.proxy(self.prev, self));
+      self.$next.on('click', $.proxy(self.next, self));
 
-      $(window).on('resize', $.proxy(this.resize, this));
+      $(window).on('resize', $.proxy(self.resize, self));
     },
 
     disable: function () {
-      if (!this.active) {
+      var self = this;
+
+      if (!self.active) {
         return;
       }
 
-      this.active = false;
-      this.stop();
+      self.active = false;
+      self.stop();
 
-      this.$element.off({
-        mouseover: this.stop,
-        mouseout: this.start
+      self.$element.off({
+        mouseover: self.stop,
+        mouseout: self.start
       });
 
-      this.$btns.off(this.options.trigger);
+      self.$btns.off(self.options.trigger);
 
-      this.$prev.off('click', this.prev);
-      this.$next.off('click', this.next);
+      self.$prev.off('click', self.prev);
+      self.$next.off('click', self.next);
 
-      $(window).off('resize', this.resize);
+      $(window).off('resize', self.resize);
     },
 
     resize: function () {
-      if (this.resizing) {
-        clearTimeout(this.resizing);
-        this.resizing = null;
+      var self = this;
+
+      if (self.resizing) {
+        clearTimeout(self.resizing);
+        self.resizing = null;
       }
 
-      this.resizing = setTimeout($.proxy(this.rerender, this), 200);
+      self.resizing = setTimeout($.proxy(self.rerender, self), 200);
     },
 
     start: function () {
-      if (this.active && !this.autoSlided) {
-        this.autoSlided = true;
-        this.autoSliding = setInterval($.proxy(this.next, this), this.options.duration);
+      var self = this;
+
+      if (self.active && !self.autoSlided) {
+        self.autoSlided = true;
+        self.autoSliding = setInterval($.proxy(self.next, self), self.options.duration);
       }
     },
 
     stop: function () {
-      if (this.autoSlided) {
-        this.autoSlided = false;
-        clearInterval(this.autoSliding);
+      var self = this;
+
+      if (self.autoSlided) {
+        self.autoSlided = false;
+        clearInterval(self.autoSliding);
       }
     },
 
     prev: function () {
-      var prev = this.index - this.length;
+      var self = this;
+      var prev = self.index - self.length;
       var index;
 
       if (prev < 0) {
-        if (this.options.effect === 'fade') {
-          index = this.firstIndexOflastView;
+        if (self.options.effect === 'fade') {
+          index = self.firstIndexOflastView;
         } else {
           index = 0;
         }
@@ -277,63 +296,69 @@
         index = prev;
       }
 
-      this.index = index;
-      this.slide();
+      self.index = index;
+      self.slide();
     },
 
     next: function () {
-      var next = this.index + this.length;
+      var self = this;
+      var next = self.index + self.length;
       var index;
 
-      if (next <= this.firstIndexOflastView) {
+      if (next <= self.firstIndexOflastView) {
         index = next;
-      } else if (this.autoSlided || this.options.effect === 'fade') {
+      } else if (self.autoSlided || self.options.effect === 'fade') {
         index = 0;
       } else {
-        index = this.firstIndexOflastView;
+        index = self.firstIndexOflastView;
       }
 
-      this.index = index;
-      this.slide();
+      self.index = index;
+      self.slide();
     },
 
     prevable: function () {
-      var prevable = this.index > 0;
+      var self = this;
+      var prevable = self.index > 0;
 
-      this.$prev.toggleClass(this.options.disableClass, !prevable);
+      self.$prev.toggleClass(self.options.disableClass, !prevable);
 
       return prevable;
     },
 
     nextable: function () {
-      var nextable = this.index < this.firstIndexOflastView;
+      var self = this;
+      var nextable = self.index < self.firstIndexOflastView;
 
-      this.$next.toggleClass(this.options.disableClass, !nextable);
+      self.$next.toggleClass(self.options.disableClass, !nextable);
 
       return nextable;
     },
 
     slide: function () {
-      var activeClass = this.options.activeClass;
-      var $target = this.$btns.eq(this.index);
+      var self = this;
+      var activeClass = self.options.activeClass;
+      var $target = self.$btns.eq(self.index);
 
       if (!$target.hasClass(activeClass)) {
         $target.addClass(activeClass).siblings().removeClass(activeClass);
 
-        if (this.options.effect !== 'fade') {
-          this.prevable();
-          this.nextable();
+        if (self.options.effect !== 'fade') {
+          self.prevable();
+          self.nextable();
         }
 
-        this.sliding();
+        self.sliding();
       }
     },
 
     sliding: $.noop,
 
     destroy: function () {
-      this.disable();
-      this.$element.removeData(NAMESPACE);
+      var self = this;
+
+      self.disable();
+      self.$element.removeData(NAMESPACE);
     }
   };
 
