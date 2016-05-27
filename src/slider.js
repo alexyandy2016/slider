@@ -55,6 +55,7 @@
                 defaults = this.defaults,
                 firstItem = this.$items.first();
 
+            firstItem.removeAttr('style');
             this.itemHeight = firstItem.height();
             this.itemWidth = firstItem.width();
             this.itemLength = this.$items.length;
@@ -75,6 +76,15 @@
 
             if (defaults.autoplay) {
                 this.start();
+            }
+        },
+
+        rerender: function () {
+            var $this = this.$element;
+
+            if ($this.width() !== this.width || $this.height() !== this.height) {
+                this.stop();
+                this.render();
             }
         },
 
@@ -193,25 +203,13 @@
             $window.off("resize", this.resize);
         },
 
-        reRender: function () {
-            var height = this.$element.height(),
-                width = this.$element.width();
-
-            if (height !== this.height || width !== this.width) {
-                this.height = height;
-                this.width = width;
-                this.stop();
-                this.render();
-            }
-        },
-
         resize: function () {
             if (this.resizing) {
                 clearTimeout(this.resizing);
                 this.resizing = null;
             }
 
-            this.resizing = setTimeout($.proxy(this.reRender, this), 200);
+            this.resizing = setTimeout($.proxy(this.rerender, this), 200);
         },
 
         start: function () {
@@ -230,15 +228,35 @@
 
         prev: function () {
             var prev = this.index - this.length;
+            var index;
 
-            this.index = prev < 0 ? 0 : prev;
+            if (prev < 0) {
+              if (this.defaults.effect === 'fade') {
+                index = this.firstIndexOflastView;
+              } else {
+                index = 0;
+              }
+            } else {
+              index = prev;
+            }
+
+            this.index = index;
             this.slide();
         },
 
         next: function () {
             var next = this.index + this.length;
+            var index;
 
-            this.index = next <= this.firstIndexOflastView ? next : this.autoSlided ? 0 : this.firstIndexOflastView;
+            if (next <= this.firstIndexOflastView) {
+              index = next;
+            } else if (this.autoSlided || this.defaults.effect === 'fade') {
+              index = 0;
+            } else {
+              index = this.firstIndexOflastView;
+            }
+
+            this.index = index;
             this.slide();
         },
 
@@ -264,8 +282,12 @@
 
             if (!$target.hasClass(activeClass)) {
                 $target.addClass(activeClass).siblings().removeClass(activeClass);
-                this.prevable();
-                this.nextable();
+
+                if (this.defaults.effect !== 'fade') {
+                  this.prevable();
+                  this.nextable();
+                }
+
                 this.sliding();
             }
         },
